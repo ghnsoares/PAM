@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>PAM</title>
+
+<style>
+    
+    body {
+        font-family:'Open Sans', 'Helvetica Neue', sans-serif;
+        background-color: #f4f1fa;
+        color: #212529;
+        text-align: center;
+        padding: 40px 20px;
+        margin: 0;
+    }
+
+    .txt { font-size: 24px; font-weight: 600; margin-bottom: 30px; }
+    
+    .txtin { 
+        font-size: 12px; 
+        text-transform: uppercase; 
+        color: #6c757d; 
+        margin: 25px 0 10px; 
+        letter-spacing: 1px;
+    }
+
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    button {
+        background: #ffffff;
+        border: 1px solid #dee2e6;
+        padding: 10px 16px;
+        border-radius: 8px;
+        font-size: 14px;
+        transition: all 0.2s;
+        color: #495057;
+    }
+
+    button:hover {
+        background: #ede3fd;
+        border-color:#cbb1f6;
+        transform: translateY(-1px);
+    }
+
+    button[onclick^="ins"] {
+        background: #ede3fd;
+        border-color: #d7c2fa;
+        color: #9d61fe;
+    }
+
+    button[onclick^="ins"]:hover {
+        background: #cbb1f6;
+    }
+
+    .containerzin { display: contents; }
+</style>
+
+
+
+</head>
+
+<div class="txt">
+<p>Exercício 1 - PAM</p>
+</div>
+
+<center>
+
+    <div class="container">
+        <div class="containerzin">
+<button onclick="insA()">Inserir valor de A</button>
+</div>
+<button onclick="insB()">Inserir valor de B</button>
+<button onclick="insC()">Inserir valor de C</button>
+<button onclick="insD()">Inserir valor de D</button>
+    </div>
+
+
+<div class="txtin">Multiplicação</div>
+
+<div class="container">
+
+<button onclick="dobro()">Dobro</button>
+<button onclick="triplo()">Triplo</button>
+<button onclick="quatruplo()">Quádruplo</button>
+<button onclick="quintuplo()">Quíntuplo</button>
+<button onclick="sextuplo()">Sêxtuplo</button>
+
+</div>
+
+<div class="txtin">Potenciação</div>
+
+<div class="container">
+
+<button onclick="quad()">Quadrado</button>
+<button onclick="cubo()">Cubo</button>
+<button onclick="quarta()">4ª potência</button>
+<button onclick="quinta()">5ª potência</button>
+<button onclick="sexta()">6ª potência</button>
+
+</div>
+
+
+<div class="txtin">Operações extras</div>
+
+<div class="container">
+<button onclick="bhaskara()">Bhaskara</button><br><br>
+<button onclick="media()">Média aritmética</button><br><br>
+<button onclick="imPar()">Ímpar ou Par?</button>
+</div>
+
+<script>
+
+let a;
+let b;
+let c;
+let d;
+
+function insA(){
+a = Number(prompt("Digite o valor de A:"));
+alert("A = " + a);
+}
+
+function insB(){
+b = Number(prompt("Digite o valor de B:"));
+alert("B = " + b);
+}
+
+function insC(){
+c = Number(prompt("Digite o valor de C:"));
+alert("C = " + c);
+}
+
+function insD(){
+d = Number(prompt("Digite o valor de D:"));
+alert("D = " + d);
+}
+
+function dobro(){
+if(a !== undefined){
+alert("Dobro: " + (a*2));
+}else{
+alert("Insira A primeiro");
+}
+}
+
+function triplo(){
+if(a !== undefined){
+alert("Triplo: " + (a*3));
+}else{
+alert("Insira A primeiro");
+}
+}
+
+function quatruplo(){
+if(a !== undefined){
+alert("Quádruplo: " + (a*4));
+}else{
+alert("Insira A primeiro");
+}
+}
+
+function quintuplo(){
+if(a !== undefined){
+alert("Quíntuplo: " + (a*5));
+}else{
+alert("Insira A primeiro");
+}
+}
+
+function sextuplo(){
+if(a !== undefined){
+alert("Sêxtuplo: " + (a*6));
+}else{
+alert("Insira A primeiro");
+}
+}
+
+function quad(){
+if(a !== undefined){
+alert("Quadrado: " + (a**2));
+}else{
+alert("Insira A primeiro");
+}
+}
+
+function cubo(){
+if(a !== undefined){
+alert("Cubo: " + (a**3));
+}else{
+alert("Insira A primeiro");
+}
+}
+
+function quarta(){
+if(a !== undefined){
+alert("4ª potência: " + (a**4));
+}else{
+alert("Insira A primeiro");
+}
+}
+
+function quinta(){
+if(a !== undefined){
+alert("5ª potência: " + (a**5));
+}else{
+alert("Insira A primeiro");
+}
+}
+
+function sexta(){
+if(a !== undefined){
+alert("6ª potência: " + (a**6));
+}else{
+alert("Insira A primeiro");
+}
+}
+
+function bhaskara(){
+
+if(a === undefined || b === undefined || c === undefined){
+alert("Insira A, B e C primeiro!");
+return;
+}
+
+let delta = b*b - 4*a*c;
+
+if(delta < 0){
+alert("Não existem raízes reais");
+return;
+}
+
+let x1 = (-b + Math.sqrt(delta)) / (2*a);
+let x2 = (-b - Math.sqrt(delta)) / (2*a);
+
+alert("As raízes são: " + x1 + " e " + x2);
+
+}
+
+function media(){
+
+if(a === undefined || b === undefined || c === undefined || d === undefined){
+alert("Insira A, B, C e D primeiro!");
+return;
+}
+
+let media = (a+b+c+d)/4;
+
+alert("A média é: " + media);
+
+}
+
+function imPar(){
+
+if(a === undefined){
+alert("Insira A primeiro!");
+return;
+}
+
+if(a % 2 === 0){
+alert("O número " + a + " é PAR");
+}else{
+alert("O número " + a + " é ÍMPAR");
+}
+
+}
+
+</script>
+
+</center>
+
+
+</body>
+</html>

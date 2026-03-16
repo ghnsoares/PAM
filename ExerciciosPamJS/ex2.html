@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>PAM II</title>
+
+<style>
+body{
+font-family: Arial;
+}
+
+table{
+border-collapse: collapse;
+}
+
+td, th{
+padding:5px;
+border:1px solid #ccc;
+}
+
+.resultado{
+margin-top:20px;
+font-size:20px;
+}
+</style>
+
+</head>
+
+<body>
+
+<h2>Controle de Vendas</h2>
+
+<table>
+
+<tr>
+<th>Produto</th>
+<th>Preço</th>
+<th>Quantidade</th>
+</tr>
+
+<tr>
+<td><input type="checkbox" class="produto" value="19.90"> Camiseta Regata</td>
+<td>19.90</td>
+<td><input type="number" class="qtd" value="0"></td>
+</tr>
+
+<tr>
+<td><input type="checkbox" class="produto" value="59.90"> Camisa Social</td>
+<td>59.90</td>
+<td><input type="number" class="qtd" value="0"></td>
+</tr>
+
+<tr>
+<td><input type="checkbox" class="produto" value="119.90"> Blusa</td>
+<td>119.90</td>
+<td><input type="number" class="qtd" value="0"></td>
+</tr>
+
+<tr>
+<td><input type="checkbox" class="produto" value="39.90"> Pullover</td>
+<td>39.90</td>
+<td><input type="number" class="qtd" value="0"></td>
+</tr>
+
+<tr>
+<td><input type="checkbox" class="produto" value="99.90"> Sapato</td>
+<td>99.90</td>
+<td><input type="number" class="qtd" value="0"></td>
+</tr>
+
+<tr>
+<td><input type="checkbox" class="produto" value="38.90"> Calça</td>
+<td>38.90</td>
+<td><input type="number" class="qtd" value="0"></td>
+</tr>
+
+<tr>
+<td><input type="checkbox" class="produto" value="9.90"> Meias</td>
+<td>9.90</td>
+<td><input type="number" class="qtd" value="0"></td>
+</tr>
+
+<tr>
+<td><input type="checkbox" class="produto" value="24.90"> Luvas</td>
+<td>24.90</td>
+<td><input type="number" class="qtd" value="0"></td>
+</tr>
+
+<tr>
+<td><input type="checkbox" class="produto" value="329.90"> Jaqueta</td>
+<td>329.90</td>
+<td><input type="number" class="qtd" value="0"></td>
+</tr>
+
+<tr>
+<td><input type="checkbox" class="produto" value="69.90"> Bermuda</td>
+<td>69.90</td>
+<td><input type="number" class="qtd" value="0"></td>
+</tr>
+
+<tr>
+<td><input type="checkbox" class="produto" value="14.90"> Chinelo</td>
+<td>14.90</td>
+<td><input type="number" class="qtd" value="0"></td>
+</tr>
+
+<tr>
+<td><input type="checkbox" class="produto" value="6.90"> Boné</td>
+<td>6.90</td>
+<td><input type="number" class="qtd" value="0"></td>
+</tr>
+
+</table>
+
+<br>
+
+<h3>Forma de Pagamento</h3>
+
+<input type="radio" name="pagamento" value="vista"> À Vista
+<input type="radio" name="pagamento" value="prazo"> À Prazo
+
+<br><br>
+
+Parcelas:
+
+<select id="parcelas">
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+</select>
+
+<br><br>
+
+<button onclick="calcular()">Calcular</button>
+
+<div class="resultado" id="resultado"></div>
+
+<script>
+
+function calcular(){
+
+let produtos = document.querySelectorAll(".produto");
+let qtd = document.querySelectorAll(".qtd");
+
+let total = 0;
+
+for(let i=0;i<produtos.length;i++){
+
+if(produtos[i].checked){
+
+let preco = parseFloat(produtos[i].value);
+let quantidade = parseInt(qtd[i].value);
+
+total += preco * quantidade;
+
+}
+
+}
+
+let pagamento = document.querySelector('input[name="pagamento"]:checked');
+
+if(!pagamento){
+alert("Escolha forma de pagamento");
+return;
+}
+
+let resultado = document.getElementById("resultado");
+
+if(pagamento.value == "vista"){
+
+total = total - (total * 0.085);
+
+resultado.innerHTML = "Total à vista: R$ " + total.toFixed(2);
+
+}
+
+else{
+
+let parcelas = parseInt(document.getElementById("parcelas").value);
+
+let juros = total * 0.06;
+
+let taxa = parcelas * 6.90;
+
+let totalFinal = total + juros + taxa;
+
+let valorParcela = totalFinal / parcelas;
+
+if(valorParcela < 10){
+
+resultado.innerHTML = "Parcela menor que R$10,00. Escolha menos parcelas.";
+
+return;
+
+}
+
+resultado.innerHTML =
+"Total: R$ " + totalFinal.toFixed(2) +
+"<br>" +
+parcelas + " parcelas de R$ " + valorParcela.toFixed(2);
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
