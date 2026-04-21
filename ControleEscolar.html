@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Controle Escolar</title>
+<style>
+body { font-family: Arial; padding: 20px; }
+input, button { margin: 5px;}
+.aluno { margin: 10px 0; }
+</style>
+</head>
+<body>
+
+<h2>Cadastro</h2>
+<form id="form">
+<input type="text" id="nome" placeholder="Nome">
+<input type="number" id="idade" placeholder="Idade">
+<input type="number" id="nota" placeholder="Nota">
+<button type="submit">Cadastrar</button>
+</form>
+
+<p id="msg"></p>
+
+<h2>Alunos</h2>
+<div id="lista"></div>
+
+<h2>Estatísticas</h2>
+<p id="stats"></p>
+
+<script>
+let alunos = [];
+
+document.getElementById("form").addEventListener("submit", e => {
+e.preventDefault();
+
+let nome = document.getElementById("nome").value;
+let idade = Number(document.getElementById("idade").value);
+let nota = Number(document.getElementById("nota").value);
+let msg = document.getElementById("msg");
+
+if (!nome || !idade || nota === "") {
+msg.textContent = "Preencha tudo";
+return;
+}
+
+if (idade <= 0 || isNaN(idade)) {
+msg.textContent = "Idade inválida";
+return;
+}
+
+if (nota < 0 || nota > 10) {
+msg.textContent = "Nota inválida";
+return;
+}
+
+msg.textContent = "";
+
+alunos.push({ nome, idade, nota });
+
+document.getElementById("form").reset();
+
+render();
+});
+
+function render() {
+let lista = document.getElementById("lista");
+lista.innerHTML = "";
+
+alunos.forEach((a, i) => {
+let div = document.createElement("div");
+div.className = "aluno";
+
+let status = a.nota >= 6 ? "Aprovado" : "Reprovado";
+
+div.innerHTML = `
+${a.nome} | ${a.idade} | ${a.nota} | ${status}
+<button onclick="remover(${i})">Remover</button>
+<button onclick="detalhes(${i})">Detalhes</button>
+`;
+
+lista.appendChild(div);
+});
+
+stats();
+}
+
+function remover(i) {
+alunos.splice(i, 1);
+render();
+}
+
+function detalhes(i) {
+let a = alunos[i];
+alert(`Nome: ${a.nome}\nIdade: ${a.idade}\nNota: ${a.nota}`);
+}
+
+function stats() {
+let total = alunos.length;
+let soma = 0;
+let aprovados = 0;
+
+alunos.forEach(a => {
+soma += a.nota;
+if (a.nota >= 6) aprovados++;
+});
+
+let media = total ? (soma / total).toFixed(2) : 0;
+let reprovados = total - aprovados;
+
+document.getElementById("stats").textContent =
+`Total: ${total} | Média: ${media} | Aprovados: ${aprovados} | Reprovados: ${reprovados}`;
+}
+</script>
+
+</body>
+</html>
